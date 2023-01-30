@@ -103,3 +103,9 @@ footer {
 #buttonHolder img:hover {
 	opacity:.5;
 }
+
+#headLine h1 { transition: all ease 0.5s;}
+
+.blue-headLine {
+	color: blue;
+}
