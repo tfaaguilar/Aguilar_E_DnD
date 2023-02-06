@@ -13,15 +13,7 @@ let theButtons = document.querySelectorAll ("#buttonHolder img"),
 
 //functionality always goes in the middle --> app behavior
 function changeBGImage() {
-	debugger; 
-	theHeading.textContent = "Super Awsome Drag and Drop Game";
-	let theNewSource = "images/backGround" + this.id + "jpg";
-
-	console.log(theNewSource);
-	
-	// start with the object, and then change a property
-	// or run a method
-	theHeading.classList.add('blue-headLine');
+	puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
 }
 
 //event handling always goes at the bottom -->
