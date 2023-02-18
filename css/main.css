@@ -11,7 +11,7 @@ body {
 	font-size:16px;
 }
 
-#game-boards {
+#game-boards { 
 	width: 100%;
 	text-align: center;
 }
@@ -56,9 +56,9 @@ body {
 
 .drop-zone {
 	width: 49.5%;
-  height: 49.5%;
-  
-  float: left;
+	height: 49.5%;
+	/* border: thin dashed white; */
+	float: left;
 	position: relative;
 }
 
@@ -69,9 +69,9 @@ body {
 	width: 90%;
 }
 
-.tl img {right: 0; bottom: 0;}
-.tr img { bottom: 0;}
-.tl img {bottom: 0;}
+.tl img { right: 0; bottom: 0; }
+.tr img { bottom: 0; }
+.bl img { right: 0; }
 
 
 header {
@@ -115,8 +115,8 @@ footer {
 	opacity:.5;
 }
 
-#headLine h1 { transition: all ease 0.5s;}
+#headLine h1 { transition: all ease 1.5s; }
 
-.blue-headLine {
-	color: blue;
+.orange-headline {
+	color: orange;
 }

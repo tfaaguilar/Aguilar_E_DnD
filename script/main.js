@@ -7,46 +7,58 @@
 
 //create a 1 to many conection with a variable
 
-let theButtons = document.querySelectorAll ("#buttonHolder img"), 		
-	theHeading = document.querySelector("#headLine h1"),
-	puzzleBoard = document.querySelector(".puzzle-board"),
-	puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
-	dropZones = document.querySelectorAll('.drop-zone'),
-	draggedPiece = null;
+let theButtons = document.querySelectorAll("#buttonHolder img"),
+    theHeading = document.querySelector("#headLine h1"),
+    puzzleBoard = document.querySelector(".puzzle-board"),
+    puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
+    dropZones = document.querySelectorAll('.drop-zone'),
+    mainBoard = document.querySelector('.puzzle-pieces'),
+
+    draggedPiece = null;
 
 //functionality always goes in the middle --> app behavior
-function changeBGImage() {
-	// the ` is a js template string. It tells de js engine to evaluate the expression inside the braces - run that little bit of code. in this case it is just pulling the button we clicked on and putting it at the end
 
-	//bug fix 2
-	puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
+//bug fix 2
+function changeBGImage() {
+    dropZones.forEach(zone => {
+        while (zone.firstChild) {
+            zone.removeChild(zone.firstChild);
+        }
+    });
+
+    puzzlePieces.forEach(piece => {
+        piece.classList.remove("dropped");
+        mainBoard.appendChild(piece);
+    });
+
+    puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
 }
 
 function handleStartDrag() {
 	console.log('started dragging this piece:', this);
-
-	//stor reference to the puzzle piece image that we are dragging so we can use it later and move it to a drop zone
 	draggedPiece = this;
 }
 
 function handleDragOver(e) {
 	e.preventDefault();
-	console.log('dragged over me:');}
+	console.log('dragged over me:');
+}
 
-	function handleDrop(e) {
-		e.preventDefault();
-		console.log('drop something on me:');
-		//bug fix 1
+function handleDrop(e) {
+	e.preventDefault();
+	console.log('drop something on me:');
+
+	//bug fix 1
 	
-		const dropZone = this;
+	const dropZone = this;
 
-		// check if the drop zone has a piece already
-		const existingPiece = dropZone.querySelector('img');
-		if (existingPiece) {
-			puzzleBoard.insertBefore(draggedPiece, existingPiece);
-			dropZone.removeChild(existingPiece);
-			mainBoard.appendChild(existingPiece);
-		}
+	// check if the drop zone has a piece already
+	const existingPiece = dropZone.querySelector('img');
+	if (existingPiece) {
+		puzzleBoard.insertBefore(draggedPiece, existingPiece);
+		dropZone.removeChild(existingPiece);
+		mainBoard.appendChild(existingPiece);
+	}
 	
 		// add the dropped piece to the drop zone
 		dropZone.appendChild(draggedPiece);
@@ -56,8 +68,7 @@ function handleDragOver(e) {
 	
 		// clear the draggedPiece reference
 		draggedPiece = null;
-
-	}
+}
 
 //event handling always goes at the bottom -->
 //How do we want users to interact with our app
