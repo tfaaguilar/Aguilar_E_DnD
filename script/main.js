@@ -12,8 +12,7 @@ let theButtons = document.querySelectorAll ("#buttonHolder img"),
 	puzzleBoard = document.querySelector(".puzzle-board"),
 	puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
 	dropZones = document.querySelectorAll('.drop-zone'),
-	// store the dragged piece in a global variable because we need it in the handleDrop function
-	draggedPiece;
+	draggedPiece = null;
 
 //functionality always goes in the middle --> app behavior
 function changeBGImage() {
@@ -39,9 +38,24 @@ function handleDragOver(e) {
 		console.log('drop something on me:');
 		//bug fix 1
 	
-		//this line is going to move the dragged piece from the left side of the board into whatever drop zone we chooce. appendChild means "add element to the container"
+		const dropZone = this;
 
-		this.appendChild(draggedPiece);
+		// check if the drop zone has a piece already
+		const existingPiece = dropZone.querySelector('img');
+		if (existingPiece) {
+			puzzleBoard.insertBefore(draggedPiece, existingPiece);
+			dropZone.removeChild(existingPiece);
+			mainBoard.appendChild(existingPiece);
+		}
+	
+		// add the dropped piece to the drop zone
+		dropZone.appendChild(draggedPiece);
+
+		// mark the piece as dropped
+		draggedPiece.classList.add("dropped");
+	
+		// clear the draggedPiece reference
+		draggedPiece = null;
 
 	}
 
